@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph Mukasa — Designer & Brand Strategist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Inter Tight', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --font-display: 'Inter Tight', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --color-text-main: #0e0e0e;
+            --color-text-muted: #6d6d6d;
+            --color-bg: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            font-feature-settings: "liga", "kern";
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text-main);
+            background: var(--color-bg);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f5f5f5; }
+        ::-webkit-scrollbar-thumb { background: #0e0e0e; border-radius: 3px; }
+
+        /* === DIRECTIONAL REVEAL ANIMATIONS === */
+        @keyframes revealUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes revealDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes revealLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes revealRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes revealScale {
+            from { opacity: 0; transform: scale(0.88); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes revealScaleUp {
+            from { opacity: 0; transform: scale(0.88) translateY(30px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(1.8); opacity: 0; }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Base hidden state */
+        .reveal, .reveal-left, .reveal-right, .reveal-scale {
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        /* Scroll DOWN active states */
+        .reveal.active-down { animation: revealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .reveal-left.active-down { animation: revealLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .reveal-right.active-down { animation: revealRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .reveal-scale.active-down { animation: revealScaleUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Scroll UP active states (mirrored directions) */
+        .reveal.active-up { animation: revealDown 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .reveal-left.active-up { animation: revealRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .reveal-right.active-up { animation: revealLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .reveal-scale.active-up { animation: revealScale 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Initial page load active (hero only) */
+        .reveal.init-active { animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        .delay-1 { animation-delay: 0.1s !important; }
+        .delay-2 { animation-delay: 0.2s !important; }
+        .delay-3 { animation-delay: 0.3s !important; }
+        .delay-4 { animation-delay: 0.4s !important; }
+        .delay-5 { animation-delay: 0.5s !important; }
+        .delay-6 { animation-delay: 0.6s !important; }
+        .delay-7 { animation-delay: 0.7s !important; }
+        .delay-8 { animation-delay: 0.8s !important; }
+        .delay-9 { animation-delay: 0.9s !important; }
+        .delay-10 { animation-delay: 1.0s !important; }
+
+        /* Hero */
+        .hero-name {
+            font-family: var(--font-display);
+            font-weight: 900;
+            line-height: 0.85;
+            letter-spacing: -0.04em;
+        }
+        .hero-subtitle {
+            font-family: var(--font-display);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(140px, auto);
+            gap: 16px;
+        }
+        @media (max-width: 1023px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: minmax(120px, auto);
+            }
+        }
+        @media (max-width: 639px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: minmax(160px, auto);
+            }
+        }
+
+        .bento-card {
+            background: #f5f5f5;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+        .bento-card-dark {
+            background: #0e0e0e;
+            color: #ffffff;
+        }
+        .bento-card-dark:hover {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+        .bento-card-image {
+            position: absolute;
+            inset: 0;
+        }
+        .bento-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bento-card:hover .bento-card-image img {
+            transform: scale(1.05);
+        }
+        .bento-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+            z-index: 1;
+        }
+        .bento-card-content {
+            position: relative;
+            z-index: 2;
+            padding: 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        /* Section headings */
+        .section-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #6d6d6d;
+        }
+        .section-heading {
+            font-family: var(--font-display);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+        }
+
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 32px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background: #0e0e0e;
+            border-radius: 50%;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .timeline-item:hover::before {
+            transform: scale(1.4);
+            background: #4a4a4a;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 22px;
+            width: 2px;
+            height: calc(100% - 14px);
+            background: #e5e5e5;
+        }
+        .timeline-item:last-child::after { display: none; }
+
+        /* Status dot */
+        .status-dot {
+            position: relative;
+            width: 10px;
+            height: 10px;
+        }
+        .status-dot::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+        .status-dot::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        /* Skill bar */
+        .skill-bar {
+            height: 4px;
+            background: #e5e5e5;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background: #0e0e0e;
+            border-radius: 2px;
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .skill-bar-fill.filled {
+            width: var(--fill-width);
+        }
+
+        /* Nav */
+        .nav-link {
+            position: relative;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: -0.01em;
+            color: #0e0e0e;
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0e0e0e;
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Contact button */
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: #0e0e0e;
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: -0.01em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .contact-btn:hover::before { opacity: 1; }
+        .contact-btn span,
+        .contact-btn .iconify {
+            position: relative;
+            z-index: 1;
+        }
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .contact-btn .iconify { transition: transform 0.3s; }
+        .contact-btn:hover .iconify { transform: translateX(3px); }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #0e0e0e, #4a4a4a, #0e0e0e);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        /* === MARQUEE === */
+        .marquee-track {
+            display: flex;
+            gap: 60px;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-item {
+            opacity: 0.15;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: default;
+            white-space: nowrap;
+        }
+        .marquee-item:hover {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+        .marquee-sep {
+            opacity: 0.08;
+            transition: opacity 0.4s;
+        }
+        .marquee-track:hover .marquee-sep {
+            opacity: 0.2;
+        }
+
+        /* Hobby card */
+        .hobby-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            background: #f5f5f5;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hobby-card:hover {
+            background: #0e0e0e;
+            color: #ffffff;
+            transform: translateX(8px);
+        }
+        .hobby-card:hover .hobby-icon {
+            background: rgba(255,255,255,0.15);
+            color: #ffffff;
+        }
+        .hobby-card:hover .hobby-icon .iconify { color: #fff; }
+        .hobby-card:hover .hobby-desc { color: rgba(255,255,255,0.65); }
+        .hobby-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 12px;
+            transition: all 0.4s;
+        }
+
+        /* Cursor follower */
+        .cursor-follower {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #0e0e0e;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease-out;
+            mix-blend-mode: difference;
+        }
+        @media (max-width: 1023px) {
+            .cursor-follower { display: none; }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #0e0e0e;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 10000;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Exp card stagger on direction */
+        .exp-card {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
+        }
+        .exp-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.08);
+        }
+
+        /* Scroll direction indicator */
+        .scroll-indicator {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .scroll-indicator.visible { opacity: 1; }
+
+        @media print {
+            .cursor-follower, .toast, .scroll-indicator { display: none !important; }
+            .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1 !important; animation: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-follower" id="cursor"></div>
+
+    <div class="toast" id="toast">
+        <span class="iconify" data-icon="lucide:check-circle" data-width="18"></span>
+        <span id="toast-text">Copied to clipboard</span>
+    </div>
+
+    <!-- Scroll Direction Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <div class="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center">
+            <span class="iconify text-white" data-icon="lucide:arrow-down" data-width="16" id="scrollArrow"></span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav style="animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;" class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-transparent transition-all duration-300" id="navbar">
+        <div class="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#hero" class="font-display text-lg tracking-tight" style="font-weight:900; letter-spacing:-0.03em;">JM.</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
+                <span class="iconify" data-icon="lucide:menu" data-width="22"></span>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-6">
+            <div class="flex flex-col gap-4 pt-2 border-t border-gray-100">
+                <a href="#about" class="nav-link py-2 mobile-link">About</a>
+                <a href="#experience" class="nav-link py-2 mobile-link">Experience</a>
+                <a href="#education" class="nav-link py-2 mobile-link">Education</a>
+                <a href="#skills" class="nav-link py-2 mobile-link">Skills</a>
+                <a href="#contact" class="nav-link py-2 mobile-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center pt-24 pb-12 px-6 relative overflow-hidden">
+        <div class="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-gray-100 to-gray-50 opacity-60 blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-gray-100 to-transparent opacity-40 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-[1400px] mx-auto w-full relative z-10">
+            <div class="reveal init-active delay-1 flex items-center gap-3 mb-8">
+                <div class="status-dot"></div>
+                <span class="font-display text-sm text-gray-500" style="font-weight:600;">Available for projects</span>
+                <span class="text-gray-300">|</span>
+                <span class="font-display text-sm text-gray-500" style="font-weight:600;">Entebbe, Uganda</span>
+            </div>
+
+            <h1 class="hero-name gradient-text reveal init-active delay-2" style="font-size: clamp(56px, 11vw, 160px);">
+                JOSEPH<br>MUKASA
+            </h1>
+
+            <div class="mt-8 md:mt-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div class="reveal init-active delay-3">
+                    <p class="hero-subtitle text-xl md:text-2xl text-gray-800 max-w-lg leading-relaxed">
+                        Website Designer. Graphics Designer.<br>
+                        Brand Strategist.
+                    </p>
+                    <p class="text-gray-500 mt-3 text-base leading-relaxed max-w-md" style="font-family:var(--font-body);">
+                        Crafting digital experiences that elevate brands and drive results. Based in Kampala, working globally.
+                    </p>
+                </div>
+                <div class="reveal init-active delay-4 flex items-center gap-4">
+                    <a href="#contact" class="contact-btn">
+                        <span>Get in Touch</span>
+                        <span class="iconify" data-icon="lucide:arrow-right" data-width="18"></span>
+                    </a>
+                    <a href="#about" class="w-14 h-14 rounded-full border-2 border-gray-200 flex items-center justify-center transition-all duration-300 hover:border-gray-800 hover:bg-gray-800 hover:text-white">
+                        <span class="iconify" data-icon="lucide:arrow-down" data-width="18"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="py-6 border-y border-gray-100 overflow-hidden">
+        <div class="marquee-track" id="marqueeTrack">
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">WEB DESIGN</span>
+            <span class="marquee-sep text-gray-300">/</span>
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">GRAPHICS DESIGN</span>
+            <span class="marquee-sep text-gray-300">/</span>
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">BRAND STRATEGY</span>
+            <span class="marquee-sep text-gray-300">/</span>
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">DIGITAL DESIGN</span>
+            <span class="marquee-sep text-gray-300">/</span>
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">UI/UX</span>
+            <span class="marquee-sep text-gray-300">/</span>
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">WEB DESIGN</span>
+            <span class="marquee-sep text-gray-300">/</span>
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">GRAPHICS DESIGN</span>
+            <span class="marquee-sep text-gray-300">/</span>
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">BRAND STRATEGY</span>
+            <span class="marquee-sep text-gray-300">/</span>
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">DIGITAL DESIGN</span>
+            <span class="marquee-sep text-gray-300">/</span>
+            <span class="marquee-item font-display text-2xl" style="font-weight:800; letter-spacing:-0.02em;">UI/UX</span>
+            <span class="marquee-sep text-gray-300">/</span>
+        </div>
+    </div>
+
+    <!-- About Bento Grid -->
+    <section id="about" class="py-24 md:py-32 px-6">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="reveal mb-12">
+                <span class="section-label">01 / About</span>
+                <h2 class="section-heading text-4xl md:text-6xl mt-3">Who I Am</h2>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Profile Photo -->
+                <div class="bento-card reveal-scale" style="grid-column: span 2; grid-row: span 2; min-height: 360px;">
+                    <div class="bento-card-image">
+                        <img src="joe.webp" alt="Joseph Mukasa" loading="lazy">
+                    </div>
+                    <div class="bento-card-overlay"></div>
+                    <div class="bento-card-content justify-end">
+                        <div>
+                            <p class="text-white/60 text-xs font-display uppercase tracking-widest mb-2" style="font-weight:600;">Portraits</p>
+                            <p class="text-white font-display text-xl" style="font-weight:700;">Joseph Mukasa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intro Card -->
+                <div class="bento-card reveal" style="grid-column: span 2; display:flex; flex-direction:column; justify-content:space-between; padding:24px 32px;">
+                    <span class="iconify text-gray-400 mb-4" data-icon="lucide:user" data-width="28"></span>
+                    <div>
+                        <h3 class="font-display text-2xl mb-3" style="font-weight:800; letter-spacing:-0.02em;">Creative Digital Designer</h3>
+                        <p class="text-gray-500 leading-relaxed text-[15px]">
+                            I am a multidisciplinary designer from Uganda specializing in crafting compelling websites, stunning graphics, and cohesive brand identities that resonate with audiences and deliver measurable impact.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Location Card -->
+                <div class="bento-card bento-card-dark reveal-right" style="display:flex; flex-direction:column; justify-content:space-between; padding:24px 32px;">
+                    <span class="iconify text-white/40 mb-4" data-icon="lucide:map-pin" data-width="28"></span>
+                    <div>
+                        <p class="text-white/50 text-xs font-display uppercase tracking-widest mb-1" style="font-weight:600;">Location</p>
+                        <p class="text-white font-display text-lg" style="font-weight:700;">Entebbe, Uganda</p>
+                    </div>
+                </div>
+
+                <!-- Languages Card -->
+                <div class="bento-card reveal-left" style="display:flex; flex-direction:column; justify-content:space-between; padding:24px 32px;">
+                    <span class="iconify text-gray-400 mb-4" data-icon="lucide:globe" data-width="28"></span>
+                    <div>
+                        <p class="text-gray-400 text-xs font-display uppercase tracking-widest mb-2" style="font-weight:600;">Languages</p>
+                        <p class="font-display text-lg" style="font-weight:700;">English</p>
+                        <p class="text-gray-500 text-sm mt-1">Fluent</p>
+                        <p class="font-display text-lg mt-3" style="font-weight:700;">Luganda</p>
+                        <p class="text-gray-500 text-sm mt-1">Native</p>
+                    </div>
+                </div>
+
+                <!-- Design Image -->
+                <div class="bento-card reveal-scale" style="grid-column: span 2; min-height: 200px;">
+                    <div class="bento-card-image">
+                        <img src="https://elements-resized.envatousercontent.com/elements-cover-images/e770e771-b69d-4d3d-b769-cbdbd4bae799?w=433&cf_fit=scale-down&q=85&format=auto&s=ba21edbc515b01bbf8f86ddf0bb48c23c860a941515937befef81ebd55b26688" alt="Design workspace" loading="lazy">
+                    </div>
+                    <div class="bento-card-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);"></div>
+                    <div class="bento-card-content">
+                        <p class="text-white/70 text-xs font-display uppercase tracking-widest" style="font-weight:600;">Design Philosophy</p>
+                        <p class="text-white font-display text-base mt-1" style="font-weight:700;">Minimal. Bold. Purposeful.</p>
+                    </div>
+                </div>
+
+                <!-- Stats Card -->
+                <div class="bento-card bento-card-dark reveal" style="grid-column: span 2; display:flex; flex-direction:column; justify-content:space-between; padding:32px;">
+                    <span class="iconify text-white/40 mb-6" data-icon="lucide:bar-chart-3" data-width="28"></span>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-white font-display text-4xl" style="font-weight:900; letter-spacing:-0.03em;">2+</p>
+                            <p class="text-white/50 text-sm mt-1">Years Experience</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-display text-4xl" style="font-weight:900; letter-spacing:-0.03em;">30+</p>
+                            <p class="text-white/50 text-sm mt-1">Projects Done</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-display text-4xl" style="font-weight:900; letter-spacing:-0.03em;">2</p>
+                            <p class="text-white/50 text-sm mt-1">Companies</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-display text-4xl" style="font-weight:900; letter-spacing:-0.03em;">100%</p>
+                            <p class="text-white/50 text-sm mt-1">Client Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 md:py-32 px-6 bg-gray-50">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="reveal mb-16">
+                <span class="section-label">02 / Experience</span>
+                <h2 class="section-heading text-4xl md:text-6xl mt-3">Work History</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Current Role -->
+                <div class="reveal-left delay-2">
+                    <div class="exp-card bg-white rounded-2xl p-8 md:p-10 relative overflow-hidden" style="box-shadow: 0 4px 30px rgba(0,0,0,0.04);">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-gray-100 to-transparent rounded-bl-full"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
+                                    <span class="iconify text-white" data-icon="lucide:monitor" data-width="22"></span>
+                                </div>
+                                <span class="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-display px-3 py-1 rounded-full" style="font-weight:600;">
+                                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                    Current
+                                </span>
+                            </div>
+                            <h3 class="font-display text-2xl mb-1" style="font-weight:800; letter-spacing:-0.02em;">Vernox Studio</h3>
+                            <p class="font-display text-gray-500 mb-6" style="font-weight:600;">Web Designer & Digital Designer</p>
+                            <p class="text-gray-600 text-[15px] leading-relaxed mb-6">
+                                Currently leading web design and digital design projects at Vernox Studio, a dedicated web and digital design company. Responsible for end-to-end design processes from concept to deployment.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs font-display bg-gray-100 px-3 py-1.5 rounded-full" style="font-weight:500;">Web Design</span>
+                                <span class="text-xs font-display bg-gray-100 px-3 py-1.5 rounded-full" style="font-weight:500;">Digital Design</span>
+                                <span class="text-xs font-display bg-gray-100 px-3 py-1.5 rounded-full" style="font-weight:500;">UI/UX</span>
+                                <span class="text-xs font-display bg-gray-100 px-3 py-1.5 rounded-full" style="font-weight:500;">Branding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Previous Role -->
+                <div class="reveal-right delay-3">
+                    <div class="exp-card bg-white rounded-2xl p-8 md:p-10 relative overflow-hidden" style="box-shadow: 0 4px 30px rgba(0,0,0,0.04);">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-gray-100 to-transparent rounded-bl-full"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center">
+                                    <span class="iconify text-gray-600" data-icon="lucide:plane" data-width="22"></span>
+                                </div>
+                                <span class="text-xs font-display text-gray-400 px-3 py-1" style="font-weight:600;">2025 - 2026</span>
+                            </div>
+                            <h3 class="font-display text-2xl mb-1" style="font-weight:800; letter-spacing:-0.02em;">Hiposplay Tours and Travel</h3>
+                            <p class="font-display text-gray-500 mb-6" style="font-weight:600;">IT Specialist — Digital Designing</p>
+                            <p class="text-gray-600 text-[15px] leading-relaxed mb-6">
+                                Served as the IT Specialist focusing on digital design, including web design and graphics design. Created visual assets and digital solutions that enhanced the company's travel and tourism brand presence.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs font-display bg-gray-100 px-3 py-1.5 rounded-full" style="font-weight:500;">Web Design</span>
+                                <span class="text-xs font-display bg-gray-100 px-3 py-1.5 rounded-full" style="font-weight:500;">Graphics Design</span>
+                                <span class="text-xs font-display bg-gray-100 px-3 py-1.5 rounded-full" style="font-weight:500;">IT Solutions</span>
+                                <span class="text-xs font-display bg-gray-100 px-3 py-1.5 rounded-full" style="font-weight:500;">Tourism</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work Showcase Images -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-14">
+                <div class="reveal-scale delay-3 rounded-2xl overflow-hidden aspect-square">
+                    <img src="A2xtLJol_o.webp" alt="Design project" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy">
+                </div>
+                <div class="reveal-scale delay-4 rounded-2xl overflow-hidden aspect-square">
+                    <img src="Web Screens PSD Mockup.webp" alt="Brand project" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy">
+                </div>
+                <div class="reveal-scale delay-5 rounded-2xl overflow-hidden aspect-square">
+                    <img src="bVlBBn3M_o.webp" alt="Graphics project" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy">
+                </div>
+                <div class="reveal-scale delay-6 rounded-2xl overflow-hidden aspect-square">
+                    <img src="FLYER.webp" alt="Digital art" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 md:py-32 px-6">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="reveal mb-16">
+                <span class="section-label">03 / Education</span>
+                <h2 class="section-heading text-4xl md:text-6xl mt-3">Academic Background</h2>
+            </div>
+
+            <div class="max-w-3xl">
+                <div class="space-y-10">
+                    <div class="timeline-item reveal-left delay-1">
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                            <div>
+                                <h3 class="font-display text-xl" style="font-weight:800; letter-spacing:-0.02em;">Namasuba College of Commerce</h3>
+                                <p class="text-gray-500 font-display text-sm" style="font-weight:500;">NCICT — National Certificate in Information & Communication Technology</p>
+                            </div>
+                            <span class="font-display text-sm text-gray-400 whitespace-nowrap bg-gray-100 px-3 py-1 rounded-full" style="font-weight:700;">2024 — 2026</span>
+                        </div>
+                        <p class="text-gray-500 text-[15px] leading-relaxed">Pursuing advanced studies in ICT with focus on digital technologies, web systems, and communication design.</p>
+                    </div>
+                    <div class="timeline-item reveal-right delay-2">
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                            <div>
+                                <h3 class="font-display text-xl" style="font-weight:800; letter-spacing:-0.02em;">Mumsa High School</h3>
+                                <p class="text-gray-500 font-display text-sm" style="font-weight:500;">Uganda Certificate of Education (UCE)</p>
+                            </div>
+                            <span class="font-display text-sm text-gray-400 whitespace-nowrap bg-gray-100 px-3 py-1 rounded-full" style="font-weight:700;">2019 — 2023</span>
+                        </div>
+                        <p class="text-gray-500 text-[15px] leading-relaxed">Completed ordinary level secondary education, building a strong academic foundation for future technical studies.</p>
+                    </div>
+                    <div class="timeline-item reveal-left delay-3">
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                            <div>
+                                <h3 class="font-display text-xl" style="font-weight:800; letter-spacing:-0.02em;">Good Shepherd Primary School</h3>
+                                <p class="text-gray-500 font-display text-sm" style="font-weight:500;">Primary Leaving Examinations (PLE)</p>
+                            </div>
+                            <span class="font-display text-sm text-gray-400 whitespace-nowrap bg-gray-100 px-3 py-1 rounded-full" style="font-weight:700;">2016 — 2018</span>
+                        </div>
+                        <p class="text-gray-500 text-[15px] leading-relaxed">Completed primary education and sat for the national PLE examinations.</p>
+                    </div>
+                    <div class="timeline-item reveal-right delay-4">
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                            <div>
+                                <h3 class="font-display text-xl" style="font-weight:800; letter-spacing:-0.02em;">Vernon Hills Primary School</h3>
+                            </div>
+                            <span class="font-display text-sm text-gray-400 whitespace-nowrap bg-gray-100 px-3 py-1 rounded-full" style="font-weight:700;">2012 — 2015</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal-left delay-5">
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                            <div>
+                                <h3 class="font-display text-xl" style="font-weight:800; letter-spacing:-0.02em;">Kibiri Modern Primary School</h3>
+                            </div>
+                            <span class="font-display text-sm text-gray-400 whitespace-nowrap bg-gray-100 px-3 py-1 rounded-full" style="font-weight:700;">2010 — 2011</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Hobbies Bento -->
+    <section id="skills" class="py-24 md:py-32 px-6 bg-gray-50">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="reveal mb-12">
+                <span class="section-label">04 / Skills & Interests</span>
+                <h2 class="section-heading text-4xl md:text-6xl mt-3">What I Do</h2>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Web Design - Large -->
+                <div class="bento-card bento-card-dark reveal-scale" style="grid-column: span 2; grid-row: span 2; min-height: 320px; display:flex; flex-direction:column; justify-content:space-between; padding:32px;">
+                    <div>
+                        <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
+                            <span class="iconify text-white" data-icon="lucide:layout" data-width="28"></span>
+                        </div>
+                        <h3 class="text-white font-display text-3xl mb-3" style="font-weight:800; letter-spacing:-0.02em;">Web Design</h3>
+                        <p class="text-white/60 text-[15px] leading-relaxed max-w-sm">
+                            Building responsive, visually striking websites that combine aesthetics with functionality. From landing pages to full web applications.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="text-xs font-display bg-white/10 text-white/80 px-3 py-1.5 rounded-full" style="font-weight:500;">HTML/CSS</span>
+                        <span class="text-xs font-display bg-white/10 text-white/80 px-3 py-1.5 rounded-full" style="font-weight:500;">JavaScript</span>
+                        <span class="text-xs font-display bg-white/10 text-white/80 px-3 py-1.5 rounded-full" style="font-weight:500;">Responsive</span>
+                        <span class="text-xs font-display bg-white/10 text-white/80 px-3 py-1.5 rounded-full" style="font-weight:500;">Figma</span>
+                        <span class="text-xs font-display bg-white/10 text-white/80 px-3 py-1.5 rounded-full" style="font-weight:500;">WordPress</span>
+                    </div>
+                </div>
+
+                <!-- Graphics Design -->
+                <div class="bento-card reveal-right delay-2" style="display:flex; flex-direction:column; justify-content:space-between; padding:24px 32px;">
+                    <div class="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center mb-4">
+                        <span class="iconify text-white" data-icon="lucide:palette" data-width="22"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-xl" style="font-weight:800; letter-spacing:-0.02em;">Graphics Design</h3>
+                        <p class="text-gray-500 text-sm mt-1">Posters, flyers, social media, print</p>
+                    </div>
+                </div>
+
+                <!-- Brand Strategy -->
+                <div class="bento-card reveal-left delay-3" style="display:flex; flex-direction:column; justify-content:space-between; padding:24px 32px;">
+                    <div class="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center mb-4">
+                        <span class="iconify text-white" data-icon="lucide:target" data-width="22"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-xl" style="font-weight:800; letter-spacing:-0.02em;">Brand Strategy</h3>
+                        <p class="text-gray-500 text-sm mt-1">Identity, positioning, guidelines</p>
+                    </div>
+                </div>
+
+                <!-- Skill Bars -->
+                <div class="bento-card reveal" style="grid-column: span 2; display:flex; flex-direction:column; justify-content:space-between; padding:24px 32px;">
+                    <p class="font-display text-sm uppercase tracking-widest text-gray-400 mb-6" style="font-weight:700;">Proficiency</p>
+                    <div class="space-y-5 skill-bars-container">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-display text-sm" style="font-weight:600;">Web Design</span>
+                                <span class="font-display text-sm text-gray-400" style="font-weight:600;">92%</span>
+                            </div>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="--fill-width: 92%;"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-display text-sm" style="font-weight:600;">Graphics Design</span>
+                                <span class="font-display text-sm text-gray-400" style="font-weight:600;">88%</span>
+                            </div>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="--fill-width: 88%;"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-display text-sm" style="font-weight:600;">Brand Strategy</span>
+                                <span class="font-display text-sm text-gray-400" style="font-weight:600;">85%</span>
+                            </div>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="--fill-width: 85%;"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-display text-sm" style="font-weight:600;">UI/UX Design</span>
+                                <span class="font-display text-sm text-gray-400" style="font-weight:600;">80%</span>
+                            </div>
+                            <div class="skill-bar"><div class="skill-bar-fill" style="--fill-width: 80%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="bento-card reveal-scale" style="grid-column: span 2; padding:24px 32px;">
+                    <p class="font-display text-sm uppercase tracking-widest text-gray-400 mb-5" style="font-weight:700;">Tools I Use</p>
+                    <div class="grid grid-cols-3 sm:grid-cols-4 gap-4">
+                        <div class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-200 transition-colors">
+                            <span class="iconify text-gray-700" data-icon="simple-icons:figma" data-width="28"></span>
+                            <span class="text-xs font-display text-gray-500" style="font-weight:500;">Figma</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-200 transition-colors">
+                            <span class="iconify text-gray-700" data-icon="simple-icons:adobephotoshop" data-width="28"></span>
+                            <span class="text-xs font-display text-gray-500" style="font-weight:500;">Photoshop</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-200 transition-colors">
+                            <span class="iconify text-gray-700" data-icon="simple-icons:adobeillustrator" data-width="28"></span>
+                            <span class="text-xs font-display text-gray-500" style="font-weight:500;">Illustrator</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-200 transition-colors">
+                            <span class="iconify text-gray-700" data-icon="simple-icons:adobeaftereffects" data-width="28"></span>
+                            <span class="text-xs font-display text-gray-500" style="font-weight:500;">After Effects</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-200 transition-colors">
+                            <span class="iconify text-gray-700" data-icon="simple-icons:canva" data-width="28"></span>
+                            <span class="text-xs font-display text-gray-500" style="font-weight:500;">Canva</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-200 transition-colors">
+                            <span class="iconify text-gray-700" data-icon="simple-icons:wordpress" data-width="28"></span>
+                            <span class="text-xs font-display text-gray-500" style="font-weight:500;">WordPress</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-200 transition-colors">
+                            <span class="iconify text-gray-700" data-icon="simple-icons:visualstudiocode" data-width="28"></span>
+                            <span class="text-xs font-display text-gray-500" style="font-weight:500;">VS Code</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-200 transition-colors">
+                            <span class="iconify text-gray-700" data-icon="simple-icons:github" data-width="28"></span>
+                            <span class="text-xs font-display text-gray-500" style="font-weight:500;">GitHub</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hobbies -->
+                <div class="bento-card bento-card-dark reveal-scale" style="grid-column: span 2; display:flex; flex-direction:column; justify-content:space-between; padding:24px 32px;">
+                    <p class="font-display text-sm uppercase tracking-widest text-white/40 mb-6" style="font-weight:700;">Hobbies & Interests</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3">
+                            <span class="iconify text-white/70" data-icon="lucide:gamepad-2" data-width="20"></span>
+                            <span class="text-white font-display text-sm" style="font-weight:600;">Gaming</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3">
+                            <span class="iconify text-white/70" data-icon="lucide:book-open" data-width="20"></span>
+                            <span class="text-white font-display text-sm" style="font-weight:600;">Reading</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3">
+                            <span class="iconify text-white/70" data-icon="lucide:music" data-width="20"></span>
+                            <span class="text-white font-display text-sm" style="font-weight:600;">Music</span>
+                        </div>
+                    </div>
+                    <p class="text-white/40 text-xs mt-4 leading-relaxed">When not designing, you will find me immersed in a good novel, exploring biblical teachings, enjoying music, or gaming to unwind.</p>
+                </div>
+
+                <!-- Hobby Images -->
+                <div class="bento-card reveal-scale delay-7" style="min-height: 200px;">
+                    <div class="bento-card-image">
+                        <img src="https://img.freepik.com/free-vector/music-background-vector-girl-listens-music-cartoon-illustration-isolated-white_460848-15738.jpg?semt=ais_hybrid&w=740&q=80" alt="Gaming" loading="lazy">
+                    </div>
+                    <div class="bento-card-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);"></div>
+                    <div class="bento-card-content">
+                        <p class="text-white font-display text-sm" style="font-weight:700;">Music</p>
+                    </div>
+                </div>
+                <div class="bento-card reveal-scale delay-8" style="min-height: 200px;">
+                    <div class="bento-card-image">
+                        <img src="https://guideposts.org/wp-content/uploads/2014/02/bible_marquee_hand.jpg.optimal.jpg" alt="Reading" loading="lazy">
+                    </div>
+                    <div class="bento-card-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);"></div>
+                    <div class="bento-card-content">
+                        <p class="text-white font-display text-sm" style="font-weight:700;">Reading</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Detail Section -->
+    <section class="py-24 md:py-32 px-6">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="reveal mb-12">
+                <span class="section-label">05 / Beyond Design</span>
+                <h2 class="section-heading text-4xl md:text-6xl mt-3">My Interests</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="hobby-card reveal-left delay-2">
+                    <div class="hobby-icon">
+                        <span class="iconify text-gray-800" data-icon="lucide:gamepad-2" data-width="22"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-lg" style="font-weight:800;">Gaming</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed hobby-desc">Strategy and adventure games sharpen my problem-solving and creative thinking.</p>
+                    </div>
+                </div>
+                <div class="hobby-card reveal delay-3">
+                    <div class="hobby-icon">
+                        <span class="iconify text-gray-800" data-icon="lucide:book-open" data-width="22"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-lg" style="font-weight:800;">Reading</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed hobby-desc">The Bible and novels fuel my imagination, perspective, and moral compass.</p>
+                    </div>
+                </div>
+                <div class="hobby-card reveal-right delay-4">
+                    <div class="hobby-icon">
+                        <span class="iconify text-gray-800" data-icon="lucide:music" data-width="22"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-lg" style="font-weight:800;">Music</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed hobby-desc">Music inspires my design rhythm and keeps me energized throughout the day.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 md:py-32 px-6 bg-gray-950 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-white/5 to-transparent blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-white/3 to-transparent blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-[1400px] mx-auto relative z-10">
+            <div class="reveal mb-16">
+                <span class="section-label" style="color: rgba(255,255,255,0.3);">06 / Contact</span>
+                <h2 class="section-heading text-4xl md:text-7xl mt-3 text-white" style="letter-spacing:-0.04em;">
+                    Let's Work<br>Together
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="reveal-left delay-2 group cursor-pointer" onclick="copyToClipboard('+256 762 017 465', 'Phone number copied')">
+                    <div class="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/25 transition-all duration-500 hover:bg-white/8">
+                        <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-white/15 transition-colors">
+                            <span class="iconify text-white" data-icon="lucide:phone" data-width="24"></span>
+                        </div>
+                        <p class="text-white/40 text-xs font-display uppercase tracking-widest mb-2" style="font-weight:600;">Phone</p>
+                        <p class="text-white font-display text-xl" style="font-weight:700;">+256 762 017 465</p>
+                        <div class="flex items-center gap-2 mt-4 text-white/30 group-hover:text-white/60 transition-colors">
+                            <span class="iconify" data-icon="lucide:copy" data-width="14"></span>
+                            <span class="text-xs font-display" style="font-weight:500;">Click to copy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal delay-3 group cursor-pointer" onclick="copyToClipboard('josephmukasa393@gmail.com', 'Email address copied')">
+                    <div class="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/25 transition-all duration-500 hover:bg-white/8">
+                        <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-white/15 transition-colors">
+                            <span class="iconify text-white" data-icon="lucide:mail" data-width="24"></span>
+                        </div>
+                        <p class="text-white/40 text-xs font-display uppercase tracking-widest mb-2" style="font-weight:600;">Email</p>
+                        <p class="text-white font-display text-lg break-all" style="font-weight:700;">josephmukasa393@gmail.com</p>
+                        <div class="flex items-center gap-2 mt-4 text-white/30 group-hover:text-white/60 transition-colors">
+                            <span class="iconify" data-icon="lucide:copy" data-width="14"></span>
+                            <span class="text-xs font-display" style="font-weight:500;">Click to copy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-right delay-4 group">
+                    <div class="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/25 transition-all duration-500 hover:bg-white/8 h-full">
+                        <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-white/15 transition-colors">
+                            <span class="iconify text-white" data-icon="lucide:map-pin" data-width="24"></span>
+                        </div>
+                        <p class="text-white/40 text-xs font-display uppercase tracking-widest mb-2" style="font-weight:600;">Location</p>
+                        <p class="text-white font-display text-xl" style="font-weight:700;">Entebbe, Uganda</p>
+                        <p class="text-white/40 text-sm mt-2">Open to remote & local opportunities</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 reveal text-center">
+                <a href="mailto:josephmukasa393@gmail.com" class="contact-btn" style="background: #ffffff; color: #0e0e0e; font-size: 17px; padding: 18px 48px;">
+                    <span>Send Me an Email</span>
+                    <span class="iconify" data-icon="lucide:arrow-up-right" data-width="20"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-100">
+        <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <span class="font-display text-lg tracking-tight" style="font-weight:900; letter-spacing:-0.03em;">JM.</span>
+                <span class="text-gray-300">|</span>
+                <span class="text-gray-400 text-sm">Joseph Mukasa</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="mailto:josephmukasa393@gmail.com" class="text-gray-400 hover:text-gray-900 transition-colors" aria-label="Email">
+                    <span class="iconify" data-icon="lucide:mail" data-width="18"></span>
+                </a>
+                <a href="tel:+256762017465" class="text-gray-400 hover:text-gray-900 transition-colors" aria-label="Phone">
+                    <span class="iconify" data-icon="lucide:phone" data-width="18"></span>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-gray-900 transition-colors" aria-label="LinkedIn">
+                    <span class="iconify" data-icon="lucide:linkedin" data-width="18"></span>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-gray-900 transition-colors" aria-label="Twitter">
+                    <span class="iconify" data-icon="lucide:twitter" data-width="18"></span>
+                </a>
+            </div>
+            <p class="text-gray-400 text-sm">2025 All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== SCROLL DIRECTION TRACKING =====
+        let scrollDirection = 'down';
+        let lastScrollY = window.scrollY;
+        let scrollTimeout;
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        const scrollArrow = document.getElementById('scrollArrow');
+
+        window.addEventListener('scroll', () => {
+            const currentY = window.scrollY;
+            if (currentY > lastScrollY) {
+                scrollDirection = 'down';
+                scrollArrow.setAttribute('data-icon', 'lucide:arrow-down');
+            } else if (currentY < lastScrollY) {
+                scrollDirection = 'up';
+                scrollArrow.setAttribute('data-icon', 'lucide:arrow-up');
+            }
+            lastScrollY = currentY;
+
+            // Show scroll indicator briefly
+            scrollIndicator.classList.add('visible');
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                scrollIndicator.classList.remove('visible');
+            }, 800);
+
+            // Navbar border
+            const navbar = document.getElementById('navbar');
+            navbar.style.borderBottomColor = currentY > 100 ? '#e5e5e5' : 'transparent';
+        });
+
+        // ===== DIRECTIONAL SCROLL REVEAL OBSERVER =====
+        // Elements re-animate every time they enter the viewport,
+        // with mirrored animation direction based on scroll direction.
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Skip hero elements that have init-active
+                if (entry.target.classList.contains('init-active')) return;
+
+                if (entry.isIntersecting) {
+                    // Remove previous direction class
+                    entry.target.classList.remove('active-down', 'active-up');
+                    // Apply direction-aware class
+                    const dirClass = scrollDirection === 'down' ? 'active-down' : 'active-up';
+                    // Force reflow so animation restarts
+                    void entry.target.offsetWidth;
+                    entry.target.classList.add(dirClass);
+
+                    // Animate skill bars inside this element
+                    entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                        bar.classList.remove('filled');
+                        void bar.offsetWidth;
+                        bar.classList.add('filled');
+                    });
+                } else {
+                    // When leaving viewport, reset so it re-animates on re-entry
+                    entry.target.classList.remove('active-down', 'active-up');
+                    entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                        bar.classList.remove('filled');
+                    });
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '0px 0px -80px 0px',
+            threshold: 0.05
+        });
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // ===== CUSTOM CURSOR =====
+        const cursor = document.getElementById('cursor');
+        let cursorX = 0, cursorY = 0;
+        let currentX = 0, currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+        });
+
+        function animateCursor() {
+            currentX += (cursorX - currentX) * 0.15;
+            currentY += (cursorY - currentY) * 0.15;
+            cursor.style.left = currentX - 12 + 'px';
+            cursor.style.top = currentY - 12 + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursor.style.left = currentX - 20 + 'px';
+                cursor.style.top = currentY - 20 + 'px';
+                cursor.style.opacity = '0.5';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '24px';
+                cursor.style.height = '24px';
+                cursor.style.opacity = '1';
+            });
+        });
+
+        // ===== MOBILE MENU =====
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.innerHTML = menuOpen
+                ? '<span class="iconify" data-icon="lucide:x" data-width="22"></span>'
+                : '<span class="iconify" data-icon="lucide:menu" data-width="22"></span>';
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuOpen = false;
+                mobileMenuBtn.innerHTML = '<span class="iconify" data-icon="lucide:menu" data-width="22"></span>';
+            });
+        });
+
+        // ===== TOAST / COPY =====
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(message);
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast(message);
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ===== HERO PARALLAX =====
+        const hero = document.getElementById('hero');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.15}px)`;
+                hero.style.opacity = 1 - (scrolled / (window.innerHeight * 1.2));
+            }
+        });
+
+        // ===== MARQUEE PAUSE ON HOVER =====
+        const marqueeTrack = document.getElementById('marqueeTrack');
+        marqueeTrack.addEventListener('mouseenter', () => {
+            marqueeTrack.style.animationPlayState = 'paused';
+        });
+        marqueeTrack.addEventListener('mouseleave', () => {
+            marqueeTrack.style.animationPlayState = 'running';
+        });
+    </script>
+</body>
+</html>
